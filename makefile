@@ -1,19 +1,32 @@
-CC = g++
-CFLAGS = -Wall -Wextra -O2
-LIBS = -lSDL2 -lSDL2_net -lSDL2_image
+# Makefile для проекта Checkers
 
-SRCS = main.cpp
-OBJS = $(SRCS:.cpp=.o)
-TARGET = chess_game
+CXX = g++
+CXXFLAGS = -std=c++11 -Wall -Wextra -O2
+INCLUDES = -Isrc $(shell sdl2-config --cflags)
+LIBS = $(shell sdl2-config --libs) -lSDL2_image -lSDL2_net
 
+# Находим все исходные файлы .cpp в каталоге src
+SOURCES := $(wildcard src/*.cpp)
+# Получаем объектные файлы, заменяя расширение .cpp на .o
+OBJECTS := $(SOURCES:.cpp=.o)
+
+TARGET = Checkers
+
+.PHONY: all run clean
+
+# Сборка проекта
 all: $(TARGET)
+
+$(TARGET): $(OBJECTS)
+	$(CXX) $(OBJECTS) -o $(TARGET) $(LIBS)
+
+src/%.o: src/%.cpp
+	$(CXX) $(CXXFLAGS) $(INCLUDES) -c $< -o $@
+
+# Запуск исполняемого файла после сборки
+run: all
 	./$(TARGET)
 
-$(TARGET): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -o $(TARGET) $(LIBS)
-
-%.o: %.cpp
-	$(CC) $(CFLAGS) -c $< -o $@
-
+# Очистка проекта
 clean:
-	rm -f $(OBJS) $(TARGET)
+	rm -f $(OBJECTS) $(TARGET)
