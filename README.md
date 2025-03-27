@@ -1,4 +1,4 @@
-```markdown
+
 # 🏁 SDL2 Checkers Game
 
 A networked and local multiplayer checkers (draughts) game built with **C++**, **SDL2**, and **SDL_net**.
@@ -30,8 +30,6 @@ To build and run the project, make sure the following libraries are installed:
 sudo apt update
 sudo apt install g++ make libsdl2-dev libsdl2-image-dev libsdl2-net-dev
 ```
-
----
 
 ## 🔧 Building the Game
 
