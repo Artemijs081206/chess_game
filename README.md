@@ -1,7 +1,3 @@
-Sure! Here's a clean and informative `README.md` for your checkers game project:
-
----
-
 ```markdown
 # 🏁 SDL2 Checkers Game
 
